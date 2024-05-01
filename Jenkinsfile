@@ -1,5 +1,8 @@
 pipeline {
     agent any
+	tools {
+        python 'Python' 
+    }
     options {
         skipStagesAfterUnstable()
     }
