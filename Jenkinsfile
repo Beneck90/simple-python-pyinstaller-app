@@ -29,5 +29,6 @@ pipeline {
                     archiveArtifacts 'dist/add2vals' 
                 }
             }
-        }apt-get install python3 python3-pip -y
+        }
+}
 }
