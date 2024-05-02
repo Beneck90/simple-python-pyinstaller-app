@@ -1,8 +1,5 @@
 pipeline {
     agent any
-	tools {
-        python 'Python' 
-    }
     options {
         skipStagesAfterUnstable()
     }
@@ -32,6 +29,10 @@ pipeline {
                     archiveArtifacts 'dist/add2vals' 
                 }
             }
-        }
+        }apt-get install python3 python3-pip -y
+
+
+
+
     }
 }
