@@ -24,12 +24,15 @@ pipeline {
                 }
             }
         }
-        stage('Deliver') {
-            steps {
-                withEnv(['PATH+EXTRA=/usr/bin/python3.11']) {
-                    sh "pyinstaller --onefile sources/add2vals.py"
-                }
-            }
+stage('Deliver') {
+    steps {
+        withEnv(["PATH+MYENV=${env.WORKSPACE}/myenv/bin"]) {
+            // Ejecuta pyinstaller desde el entorno virtual
+            sh "${env.WORKSPACE}/myenv/bin/pyinstaller --onefile sources/add2vals.py"
+        }
+    }
+}
+
             post {
                 success {
                     archiveArtifacts 'dist/add2vals'
