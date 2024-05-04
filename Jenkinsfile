@@ -24,20 +24,21 @@ pipeline {
                 }
             }
         }
-		stage('Deliver') {
-			steps {
-			// Prepara el entorno con el PATH modificado
-			withEnv(["PATH+EXTRA=${env.WORKSPACE}/myenv/bin:${env.PATH}"]) {
-            // Ejecuta pyinstaller desde el entorno virtual
-            sh "pyinstaller --onefile sources/add2vals.py"
-			}
-		}
-		post {
-			success {
+stage('Deliver') {
+    steps {
+        // Prepara el entorno con el PATH modificado para incluir la ruta del entorno virtual
+        withEnv(["PATH=${env.WORKSPACE}/myenv/bin:${env.PATH}"]) {
+            // Ejecuta pyinstaller desde el entorno virtual especificando la ruta completa
+            sh "/myenv/bin/pyinstaller --onefile sources/add2vals.py"
+        }
+    }
+    post {
+        success {
             archiveArtifacts 'dist/add2vals'
-				}
-			}
-		}
+        }
+    }
+}
+
 
     }
 }
